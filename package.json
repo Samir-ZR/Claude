@@ -1,0 +1,16 @@
+{
+  "name": "steal-a-brainrot",
+  "version": "1.0.0",
+  "description": "Multiplayer Steal a Brainrot clone — Node + WebSocket server + Three.js client.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
