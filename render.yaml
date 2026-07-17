@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: brainrot-shop
+    runtime: node
+    plan: free
+    branch: claude/brainrot-shop-site-2t0ujn
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: ADMIN_PASSWORD
+        sync: false

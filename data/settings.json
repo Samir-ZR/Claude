@@ -1,0 +1,14 @@
+{
+  "shopName": "Brainrot Shop",
+  "tagline": "La boutique officielle de mes brainrot",
+  "logoEmoji": "🧠",
+  "primaryColor": "#7c3aed",
+  "accentColor": "#22d3ee",
+  "bannerEnabled": false,
+  "bannerText": "🔥 Livraison rapide sur tous les brainrot !",
+  "heroTitle": "Catalogue",
+  "heroSubtitle": "Choisis ton brainrot et ajoute-le au panier.",
+  "customCss": "",
+  "customJs": "",
+  "customHtml": ""
+}
