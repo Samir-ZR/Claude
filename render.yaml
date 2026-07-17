@@ -3,6 +3,7 @@ services:
     name: brainrot-shop
     runtime: node
     plan: free
+    branch: claude/brainrot-shop-site-2t0ujn
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
