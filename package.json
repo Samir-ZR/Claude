@@ -1,0 +1,16 @@
+{
+  "name": "brainrot-shop",
+  "version": "1.0.0",
+  "description": "Boutique en ligne pour vendre les brainrot de mon jeu — catalogue modifiable avec panneau admin.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

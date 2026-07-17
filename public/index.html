@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainrot Shop — Achète les meilleurs brainrot</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__emoji">🧠</span>
+      <div>
+        <h1>Brainrot Shop</h1>
+        <p>La boutique officielle de mes brainrot</p>
+      </div>
+    </div>
+    <nav class="topbar__nav">
+      <button class="tab active" data-tab="shop">Boutique</button>
+      <button class="tab hidden" data-tab="orders" id="orders-tab-btn">Commandes</button>
+      <button class="btn btn--ghost" id="admin-toggle">🔒 Mode admin</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <!-- SHOP VIEW -->
+    <section id="view-shop" class="view active">
+      <div class="view-header">
+        <div>
+          <h2>Catalogue</h2>
+          <p class="muted">Choisis ton brainrot et passe commande.</p>
+        </div>
+        <button class="btn btn--primary hidden" id="add-brainrot-btn">+ Ajouter un brainrot</button>
+      </div>
+      <div class="grid" id="brainrot-grid"></div>
+      <p class="empty-state hidden" id="shop-empty">Aucun brainrot en catalogue pour le moment.</p>
+    </section>
+
+    <!-- ORDERS VIEW (admin only) -->
+    <section id="view-orders" class="view">
+      <div class="view-header">
+        <div>
+          <h2>Commandes reçues</h2>
+          <p class="muted">Contacte l'acheteur pour finaliser le paiement et la livraison.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table" id="orders-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Brainrot</th>
+              <th>Qté</th>
+              <th>Total</th>
+              <th>Acheteur</th>
+              <th>Contact</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody"></tbody>
+        </table>
+      </div>
+      <p class="empty-state hidden" id="orders-empty">Aucune commande pour l'instant.</p>
+    </section>
+  </main>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay hidden" id="login-modal">
+    <div class="modal">
+      <h3>Connexion admin</h3>
+      <p class="muted">Entre le mot de passe admin pour ajouter, modifier ou supprimer des brainrot.</p>
+      <form id="login-form">
+        <label>
+          <span>Mot de passe</span>
+          <input type="password" id="admin-password" required autocomplete="off" />
+        </label>
+        <p class="form-error hidden" id="login-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Se connecter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT BRAINROT MODAL -->
+  <div class="modal-overlay hidden" id="brainrot-modal">
+    <div class="modal">
+      <h3 id="brainrot-modal-title">Ajouter un brainrot</h3>
+      <form id="brainrot-form">
+        <input type="hidden" id="brainrot-id" />
+        <label>
+          <span>Nom</span>
+          <input type="text" id="brainrot-name" placeholder="Tralalero Tralala" required />
+        </label>
+        <label>
+          <span>Emoji / icône</span>
+          <input type="text" id="brainrot-emoji" placeholder="🦈" maxlength="4" />
+        </label>
+        <label>
+          <span>Rareté</span>
+          <select id="brainrot-rarity">
+            <option value="common">Commun</option>
+            <option value="rare">Rare</option>
+            <option value="epic">Épique</option>
+            <option value="legendary">Légendaire</option>
+            <option value="mythic">Mythique</option>
+            <option value="god">Brainrot God</option>
+          </select>
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Prix (€)</span>
+            <input type="number" id="brainrot-price" min="0" step="0.5" required />
+          </label>
+          <label>
+            <span>Stock</span>
+            <input type="number" id="brainrot-stock" min="0" step="1" required />
+          </label>
+        </div>
+        <label>
+          <span>Description</span>
+          <textarea id="brainrot-description" rows="2" placeholder="Petite description marrante..."></textarea>
+        </label>
+        <p class="form-error hidden" id="brainrot-form-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--danger hidden" id="delete-brainrot-btn">Supprimer</button>
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- BUY MODAL -->
+  <div class="modal-overlay hidden" id="buy-modal">
+    <div class="modal">
+      <h3>Commander <span id="buy-item-name"></span></h3>
+      <p class="muted" id="buy-item-price"></p>
+      <form id="buy-form">
+        <input type="hidden" id="buy-brainrot-id" />
+        <label>
+          <span>Quantité</span>
+          <input type="number" id="buy-quantity" min="1" step="1" value="1" required />
+        </label>
+        <label>
+          <span>Ton nom / pseudo</span>
+          <input type="text" id="buy-name" required />
+        </label>
+        <label>
+          <span>Contact (email, Discord...)</span>
+          <input type="text" id="buy-contact" required />
+        </label>
+        <p class="muted small">Pas de paiement en ligne : le vendeur te recontacte pour finaliser.</p>
+        <p class="form-error hidden" id="buy-form-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Envoyer la commande</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal-overlay hidden" id="confirm-modal">
+    <div class="modal modal--center">
+      <div class="confirm-icon">✅</div>
+      <h3>Commande envoyée !</h3>
+      <p class="muted">Le vendeur va te contacter pour finaliser le paiement et la livraison de ton brainrot.</p>
+      <div class="modal-actions modal-actions--center">
+        <button type="button" class="btn btn--primary" data-close-modal>OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
