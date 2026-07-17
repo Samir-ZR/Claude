@@ -1,5 +1,22 @@
 # Brainrot Shop
 
+## 🌐 Version en ligne (GitHub Pages)
+
+Le site est déployé automatiquement sur GitHub Pages à chaque push sur cette branche (workflow `.github/workflows/deploy-pages.yml`, dossier `site/`) :
+
+- **Boutique** : https://samir-zr.github.io/Claude/
+- **Admin** : https://samir-zr.github.io/Claude/admin/
+
+Cette version en ligne est 100% statique : pas de serveur à nous. Les données (catalogue, commandes, messages, apparence) vivent dans un bin JSON hébergé sur extendsclass.com, partagé entre la boutique et l'admin — c'est ce qui les relie. Conséquences honnêtes de ce choix :
+
+- **Sécurité légère** : le mot de passe admin ne protège que l'interface. Quelqu'un de technique qui lit le code source de la page peut trouver l'adresse du bin et modifier les données directement. OK pour une boutique entre amis, pas pour du commerce sérieux.
+- **Pérennité** : un bin inactif pendant plusieurs mois peut être supprimé par le service. Une boutique visitée régulièrement reste vivante.
+- **Notifications** : l'admin vérifie les nouveautés toutes les 15 secondes quand l'onglet est ouvert (pas de push mobile).
+
+La version serveur Node (ci-dessous) reste le chemin « sérieux » si un jour tu veux déployer sur Render avec une vraie protection côté serveur.
+
+## Version serveur Node (locale / Render)
+
 Deux sites reliés par un même serveur :
 
 - **Site client** (`/`) — la boutique publique : catalogue, panier, commande, message au vendeur.
