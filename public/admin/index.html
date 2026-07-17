@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainrot Shop — Espace Admin</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- LOGIN SCREEN -->
+  <section id="login-screen" class="login">
+    <div class="login__card">
+      <div class="login__brand">
+        <span class="brand__emoji">🛠️</span>
+        <h1>Espace Admin</h1>
+        <p>Brainrot Shop</p>
+      </div>
+      <form id="login-form">
+        <label>
+          <span>Mot de passe admin</span>
+          <input type="password" id="admin-password" required autocomplete="off" />
+        </label>
+        <p class="form-error hidden" id="login-error"></p>
+        <button type="submit" class="btn btn--primary" style="width:100%">Se connecter</button>
+      </form>
+      <a href="/" class="link">← Retour à la boutique</a>
+    </div>
+  </section>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <!-- ADMIN APP -->
+  <div id="admin-app" class="hidden">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand__emoji">🛠️</span>
+        <div>
+          <h1>Espace Admin</h1>
+          <p>Brainrot Shop</p>
+        </div>
+      </div>
+      <nav class="topbar__nav">
+        <button class="tab active" data-tab="products">Produits</button>
+        <button class="tab" data-tab="orders">Commandes</button>
+        <button class="tab" data-tab="messages">Messages</button>
+        <button class="tab" data-tab="appearance">Apparence</button>
+        <button class="icon-btn bell" id="bell-btn" title="Notifications">
+          🔔<span class="bell-count hidden" id="bell-count">0</span>
+        </button>
+        <a href="/" target="_blank" class="btn btn--ghost">🔗 Voir la boutique</a>
+        <button class="btn btn--ghost" id="logout-btn">Déconnexion</button>
+      </nav>
+    </header>
+
+    <main class="content">
+      <!-- PRODUCTS -->
+      <section id="view-products" class="view active">
+        <div class="view-header">
+          <div>
+            <h2>Produits</h2>
+            <p class="muted">Ajoute, modifie ou supprime tes brainrot.</p>
+          </div>
+          <button class="btn btn--primary" id="add-brainrot-btn">+ Ajouter un brainrot</button>
+        </div>
+        <div class="grid" id="brainrot-grid"></div>
+        <p class="empty-state hidden" id="shop-empty">Aucun brainrot en catalogue pour le moment.</p>
+      </section>
+
+      <!-- ORDERS -->
+      <section id="view-orders" class="view">
+        <div class="view-header">
+          <div>
+            <h2>Commandes reçues</h2>
+            <p class="muted">Contacte l'acheteur pour finaliser le paiement et la livraison.</p>
+          </div>
+        </div>
+        <div id="orders-list"></div>
+        <p class="empty-state hidden" id="orders-empty">Aucune commande pour l'instant.</p>
+      </section>
+
+      <!-- MESSAGES -->
+      <section id="view-messages" class="view">
+        <div class="view-header">
+          <div>
+            <h2>Messages</h2>
+            <p class="muted">Questions envoyées par les visiteurs. Réponds-leur via le contact fourni.</p>
+          </div>
+        </div>
+        <div id="messages-list"></div>
+        <p class="empty-state hidden" id="messages-empty">Aucun message pour l'instant.</p>
+      </section>
+
+      <!-- APPEARANCE -->
+      <section id="view-appearance" class="view">
+        <div class="view-header">
+          <div>
+            <h2>Apparence du site</h2>
+            <p class="muted">Personnalise l'interface de la boutique visible par tes clients.</p>
+          </div>
+          <button class="btn btn--primary" id="edit-appearance-btn">✏️ Modifier</button>
+        </div>
+        <div class="card appearance-summary" id="appearance-summary"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT BRAINROT MODAL -->
+  <div class="modal-overlay hidden" id="brainrot-modal">
+    <div class="modal">
+      <h3 id="brainrot-modal-title">Ajouter un brainrot</h3>
+      <form id="brainrot-form">
+        <input type="hidden" id="brainrot-id" />
+        <label>
+          <span>Nom</span>
+          <input type="text" id="brainrot-name" placeholder="Tralalero Tralala" required />
+        </label>
+        <label>
+          <span>Emoji / icône</span>
+          <input type="text" id="brainrot-emoji" placeholder="🦈" maxlength="4" />
+        </label>
+        <label>
+          <span>Rareté</span>
+          <select id="brainrot-rarity">
+            <option value="common">Commun</option>
+            <option value="rare">Rare</option>
+            <option value="epic">Épique</option>
+            <option value="legendary">Légendaire</option>
+            <option value="mythic">Mythique</option>
+            <option value="god">Brainrot God</option>
+          </select>
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Prix (€)</span>
+            <input type="number" id="brainrot-price" min="0" step="0.5" required />
+          </label>
+          <label>
+            <span>Stock</span>
+            <input type="number" id="brainrot-stock" min="0" step="1" required />
+          </label>
+        </div>
+        <label>
+          <span>Description</span>
+          <textarea id="brainrot-description" rows="2" placeholder="Petite description marrante..."></textarea>
+        </label>
+        <p class="form-error hidden" id="brainrot-form-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--danger hidden" id="delete-brainrot-btn">Supprimer</button>
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- APPEARANCE CHOICE MODAL -->
+  <div class="modal-overlay hidden" id="appearance-choice-modal">
+    <div class="modal modal--center">
+      <h3>Comment veux-tu modifier l'interface ?</h3>
+      <p class="muted">Choisis ton mode d'édition.</p>
+      <div class="choice-buttons">
+        <button type="button" class="btn btn--primary" id="choice-no-code">✏️ Modifier sans code</button>
+        <button type="button" class="btn btn--ghost" id="choice-code">💻 Modifier le code</button>
+      </div>
+      <div class="modal-actions modal-actions--center">
+        <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPEARANCE: NO-CODE MODAL -->
+  <div class="modal-overlay hidden" id="appearance-nocode-modal">
+    <div class="modal">
+      <h3>Personnaliser sans code</h3>
+      <form id="appearance-nocode-form">
+        <label>
+          <span>Nom de la boutique</span>
+          <input type="text" id="app-shop-name" required />
+        </label>
+        <label>
+          <span>Slogan</span>
+          <input type="text" id="app-tagline" />
+        </label>
+        <label>
+          <span>Logo (emoji)</span>
+          <input type="text" id="app-logo" maxlength="4" />
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Couleur principale</span>
+            <input type="color" id="app-primary-color" />
+          </label>
+          <label>
+            <span>Couleur d'accent</span>
+            <input type="color" id="app-accent-color" />
+          </label>
+        </div>
+        <label>
+          <span>Titre du catalogue</span>
+          <input type="text" id="app-hero-title" />
+        </label>
+        <label>
+          <span>Sous-titre du catalogue</span>
+          <input type="text" id="app-hero-subtitle" />
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="app-banner-enabled" />
+          <span>Afficher une bannière en haut du site</span>
+        </label>
+        <label>
+          <span>Texte de la bannière</span>
+          <input type="text" id="app-banner-text" />
+        </label>
+        <p class="form-error hidden" id="appearance-nocode-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- APPEARANCE: CODE MODAL -->
+  <div class="modal-overlay hidden" id="appearance-code-modal">
+    <div class="modal modal--wide">
+      <h3>Modifier le code</h3>
+      <p class="warning-box">⚠️ Ce code s'exécute directement sur le site vu par tes clients. Ne colle rien dont tu n'es pas sûr·e — et garde ton mot de passe admin secret : quiconque le connaît peut injecter n'importe quel code sur ta boutique publique.</p>
+      <form id="appearance-code-form">
+        <label>
+          <span>CSS personnalisé</span>
+          <textarea id="app-custom-css" rows="5" class="code-area" placeholder="body { }"></textarea>
+        </label>
+        <label>
+          <span>JavaScript personnalisé</span>
+          <textarea id="app-custom-js" rows="5" class="code-area" placeholder="console.log('hello')"></textarea>
+        </label>
+        <label>
+          <span>Bloc HTML personnalisé (affiché en haut de la boutique)</span>
+          <textarea id="app-custom-html" rows="4" class="code-area" placeholder="&lt;div&gt;...&lt;/div&gt;"></textarea>
+        </label>
+        <p class="form-error hidden" id="appearance-code-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainrot Shop — Achète les meilleurs brainrot</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="banner hidden" id="banner"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__emoji" id="shop-logo">🧠</span>
+      <div>
+        <h1 id="shop-name">Brainrot Shop</h1>
+        <p id="shop-tagline">La boutique officielle de mes brainrot</p>
+      </div>
+    </div>
+    <nav class="topbar__nav">
+      <button class="btn btn--ghost" id="contact-btn">✉️ Contacter le vendeur</button>
+      <button class="btn btn--primary cart-btn" id="cart-btn">
+        🛒 Panier <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div id="custom-html-block"></div>
+
+    <section class="view-header">
+      <div>
+        <h2 id="hero-title">Catalogue</h2>
+        <p class="muted" id="hero-subtitle">Choisis ton brainrot et ajoute-le au panier.</p>
+      </div>
+    </section>
+    <div class="grid" id="brainrot-grid"></div>
+    <p class="empty-state hidden" id="shop-empty">Aucun brainrot en catalogue pour le moment.</p>
+  </main>
+
+  <!-- CART DRAWER -->
+  <div class="modal-overlay hidden" id="cart-modal">
+    <div class="modal modal--wide">
+      <h3>Ton panier</h3>
+      <div id="cart-items"></div>
+      <p class="empty-state hidden" id="cart-empty">Ton panier est vide.</p>
+      <div class="cart-total" id="cart-total-row">
+        <span>Total</span>
+        <strong id="cart-total">0,00 €</strong>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn--ghost" data-close-modal>Continuer mes achats</button>
+        <button type="button" class="btn btn--primary" id="checkout-btn">Commander</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay hidden" id="checkout-modal">
+    <div class="modal">
+      <h3>Finaliser la commande</h3>
+      <p class="muted small">Pas de paiement en ligne : le vendeur te recontacte pour finaliser.</p>
+      <form id="checkout-form">
+        <label>
+          <span>Ton nom / pseudo</span>
+          <input type="text" id="checkout-name" required />
+        </label>
+        <label>
+          <span>Contact (email, Discord...)</span>
+          <input type="text" id="checkout-contact" required />
+        </label>
+        <p class="form-error hidden" id="checkout-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Envoyer la commande</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONTACT / MESSAGE MODAL -->
+  <div class="modal-overlay hidden" id="contact-modal">
+    <div class="modal">
+      <h3>Contacter le vendeur</h3>
+      <p class="muted small">Une question sur un brainrot ? Envoie un message, le vendeur te répondra directement via ton contact.</p>
+      <form id="contact-form">
+        <label>
+          <span>Ton nom / pseudo</span>
+          <input type="text" id="contact-name" required />
+        </label>
+        <label>
+          <span>Contact (email, Discord...)</span>
+          <input type="text" id="contact-contact" required />
+        </label>
+        <label>
+          <span>Brainrot concerné (optionnel)</span>
+          <select id="contact-brainrot">
+            <option value="">— Aucun en particulier —</option>
+          </select>
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea id="contact-message" rows="3" required></textarea>
+        </label>
+        <p class="form-error hidden" id="contact-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn--ghost" data-close-modal>Annuler</button>
+          <button type="submit" class="btn btn--primary">Envoyer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal-overlay hidden" id="confirm-modal">
+    <div class="modal modal--center">
+      <div class="confirm-icon">✅</div>
+      <h3 id="confirm-title">C'est envoyé !</h3>
+      <p class="muted" id="confirm-text">Le vendeur va te contacter pour finaliser.</p>
+      <div class="modal-actions modal-actions--center">
+        <button type="button" class="btn btn--primary" data-close-modal>OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

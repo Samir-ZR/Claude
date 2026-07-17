@@ -1,7 +1,7 @@
 {
   "name": "brainrot-shop",
   "version": "1.0.0",
-  "description": "Boutique en ligne pour vendre les brainrot de mon jeu — catalogue modifiable avec panneau admin.",
+  "description": "Boutique en ligne pour vendre les brainrot de mon jeu — site client (panier, commande, messages) relié à un site admin (produits, commandes, apparence).",
   "type": "module",
   "engines": {
     "node": ">=18"
@@ -11,6 +11,7 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
   }
 }
