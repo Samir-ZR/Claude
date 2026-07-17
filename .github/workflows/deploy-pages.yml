@@ -1,0 +1,29 @@
+name: Deploy Brainrot Shop to GitHub Pages
+
+on:
+  push:
+    branches: [claude/brainrot-shop-site-2t0ujn]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Publie le contenu de site/ sur la branche gh-pages : GitHub Pages
+      # s'active automatiquement sur cette branche, sans passer par l'API
+      # d'activation (refusée au jeton du workflow).
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

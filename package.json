@@ -1,0 +1,19 @@
+{
+  "name": "brainrot-shop",
+  "version": "1.0.0",
+  "description": "Boutique en ligne pour vendre les brainrot de mon jeu — site client (panier, commande, messages) relié à un site admin (produits, commandes, apparence).",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "open": "node scripts/start-and-open.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "open": "^10.1.0",
+    "ws": "^8.18.0"
+  }
+}

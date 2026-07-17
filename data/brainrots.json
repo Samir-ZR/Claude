@@ -1,0 +1,52 @@
+[
+  {
+    "id": "trippi-troppi",
+    "name": "Trippi Troppi",
+    "emoji": "🦈",
+    "rarity": "common",
+    "price": 2,
+    "stock": 20,
+    "description": "Un classique pour débuter ta collection.",
+    "createdAt": "2026-07-17T00:00:00.000Z"
+  },
+  {
+    "id": "brr-brr-patapim",
+    "name": "Brr Brr Patapim",
+    "emoji": "🌲",
+    "rarity": "rare",
+    "price": 6,
+    "stock": 12,
+    "description": "Se fond dans la forêt, mais pas dans ton stand.",
+    "createdAt": "2026-07-17T00:00:00.000Z"
+  },
+  {
+    "id": "tung-tung-tung-sahur",
+    "name": "Tung Tung Tung Sahur",
+    "emoji": "🥁",
+    "rarity": "epic",
+    "price": 15,
+    "stock": 6,
+    "description": "Il tape, il tape, il ne s'arrête jamais.",
+    "createdAt": "2026-07-17T00:00:00.000Z"
+  },
+  {
+    "id": "bombardiro-crocodilo",
+    "name": "Bombardiro Crocodilo",
+    "emoji": "🐊",
+    "rarity": "legendary",
+    "price": 40,
+    "stock": 3,
+    "description": "Vole haut, revenu massif.",
+    "createdAt": "2026-07-17T00:00:00.000Z"
+  },
+  {
+    "id": "la-vacca-saturno-saturnita",
+    "name": "La Vacca Saturno Saturnita",
+    "emoji": "🪐",
+    "rarity": "god",
+    "price": 120,
+    "stock": 1,
+    "description": "Le graal absolu. Une seule unité disponible.",
+    "createdAt": "2026-07-17T00:00:00.000Z"
+  }
+]
