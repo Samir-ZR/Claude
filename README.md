@@ -44,6 +44,17 @@ npm start
 - Boutique : **http://localhost:3000**
 - Admin : **http://localhost:3000/admin**
 
+### Ouvrir les deux sites automatiquement
+
+Pour lancer le serveur et ouvrir directement la boutique et l'admin dans deux onglets de ton navigateur par défaut :
+
+```bash
+npm install
+npm run open
+```
+
+Ça démarre `node server.js` puis ouvre `http://localhost:3000/` et `http://localhost:3000/admin` dès que le serveur répond. Laisse le terminal ouvert (le serveur tourne tant que tu ne fais pas Ctrl+C) — les deux onglets restent utilisables en même temps, y compris les notifications en direct côté admin.
+
 Pour changer le mot de passe en local :
 
 ```bash
