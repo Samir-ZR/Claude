@@ -1,11 +1,24 @@
 # Brainrot Shop
 
-## 🌐 Version en ligne (GitHub Pages)
+## 🌐 Les deux sites en ligne (liens qui marchent maintenant)
 
-Le site est déployé automatiquement sur GitHub Pages à chaque push sur cette branche (workflow `.github/workflows/deploy-pages.yml`, dossier `site/`) :
+| Site | Lien court | Lien complet |
+|---|---|---|
+| 🛒 Boutique (à partager aux clients) | https://tinyurl.com/2xwe4h44 | https://raw.githack.com/Samir-ZR/Claude/gh-pages/index.html |
+| 🛠️ Admin (privé) | https://tinyurl.com/27e2ygfk | https://raw.githack.com/Samir-ZR/Claude/gh-pages/admin/index.html |
+
+Mot de passe admin par défaut : `brainrot123` — à changer avec le bouton 🔑 dans l'espace admin.
+
+Ces adresses servent les fichiers de la branche `gh-pages` via **githack**, un service qui publie n'importe quel fichier d'un dépôt GitHub public avec les bons types MIME. Avantage : aucune configuration ni compte nécessaire. Limite : githack est un service tiers gratuit soumis à un usage raisonnable — pour une boutique très fréquentée, mieux vaut activer GitHub Pages (ci-dessous) ou déployer la version serveur.
+
+### Adresses GitHub Pages (nécessitent une activation manuelle)
+
+Le workflow `.github/workflows/deploy-pages.yml` publie déjà le dossier `site/` sur la branche `gh-pages` à chaque push. Il reste une étape que seul le propriétaire du dépôt peut faire, dans les réglages web de GitHub (Settings → Pages → Branch : `gh-pages` → Save). Une fois activé :
 
 - **Boutique** : https://samir-zr.github.io/Claude/
 - **Admin** : https://samir-zr.github.io/Claude/admin/
+
+### Fonctionnement et limites de la version en ligne
 
 Cette version en ligne est 100% statique : pas de serveur à nous. Les données (catalogue, commandes, messages, apparence) vivent dans un bin JSON hébergé sur extendsclass.com, partagé entre la boutique et l'admin — c'est ce qui les relie. Conséquences honnêtes de ce choix :
 
